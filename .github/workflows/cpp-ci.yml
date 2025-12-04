@@ -23,12 +23,15 @@ jobs:
       - name: Build
         run: cmake --build build
 
-      - name: List tests
-        run: |
-          cd build
-          ctest -N
-
       - name: Run tests and export JUnit
         run: |
           cd build
           ctest --output-on-failure --output-junit test-results.xml
+
+      - name: Publish test results
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: CTest
+          path: build/test-results.xml
+          reporter: java-junit
