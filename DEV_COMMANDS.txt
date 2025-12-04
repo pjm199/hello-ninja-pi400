@@ -1,0 +1,66 @@
+C++ / CMake / Ninja QUICK REFERENCE
+===================================
+
+Project layout (this repo)
+--------------------------
+Source dir:   .
+Build dir:    ./build
+Binary:       ./build/hello_ninja
+
+
+Configure & build
+-----------------
+# 1) Configure (Release-ish by default)
+cmake -S . -B build -G Ninja
+
+# 2) Configure for Debug (with -g, better for gdb)
+cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug
+
+# 3) Build with Ninja (after configure)
+cmake --build build
+
+# 4) Clean build directory completely
+rm -rf build
+
+# 5) Clean with Ninja (if build dir exists)
+ninja -C build clean
+
+
+Run the program
+---------------
+# From project root
+./build/hello_ninja
+
+
+Basic single-file compile (without CMake)
+-----------------------------------------
+# Just for quick tests, not the main workflow
+g++ -std=c++17 -Wall -Wextra -Wpedantic -g main.cpp -o main
+./main
+
+
+Debugging with gdb (terminal)
+-----------------------------
+# Start debugger on the built binary
+gdb ./build/hello_ninja
+
+# Inside gdb:
+#   break main        # set breakpoint at main()
+#   run               # run program
+#   next / step       # step over / into
+#   print sum         # show variable
+#   bt                # backtrace (call stack)
+#   quit              # exit gdb
+
+
+VS Code (Remote SSH) workflow
+-----------------------------
+1. Edit code in VS Code (SSH: pi400).
+2. Build:
+   - Ctrl+Shift+B   # runs CMake + Ninja via tasks.json
+3. Debug:
+   - F5             # launch "Debug hello_ninja"
+
+Remember:
+- If behavior doesn’t match code, you probably forgot to rebuild.
+- C++ is not like Next.js: EDIT → BUILD → RUN/DEBUG.

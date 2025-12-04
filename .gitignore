@@ -1,0 +1,9 @@
+# Build directory
+/build/
+
+# VS Code settings (optional)
+.vscode/
+
+# CMake cache files (if any)
+CMakeCache.txt
+CMakeFiles/
