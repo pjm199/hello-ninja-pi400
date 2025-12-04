@@ -28,7 +28,7 @@ jobs:
           cd build
           ctest -N
 
-      - name: Run tests (verbose)
+      - name: Run tests and export JUnit
         run: |
           cd build
-          ctest -V
+          ctest --output-on-failure --output-junit test-results.xml
