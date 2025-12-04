@@ -23,7 +23,12 @@ jobs:
       - name: Build
         run: cmake --build build
 
-      - name: Run tests
+      - name: List tests
         run: |
           cd build
-          ctest --output-on-failure
+          ctest -N
+
+      - name: Run tests (verbose)
+        run: |
+          cd build
+          ctest -V
